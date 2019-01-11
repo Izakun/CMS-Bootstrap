@@ -2,7 +2,7 @@
 
 class DbConnect {
     private $user= "root";
-    private $pass = "pwroot";
+    private $pass = "root";
 
     public function connexionBDD(){
 
