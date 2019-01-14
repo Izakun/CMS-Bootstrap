@@ -1,6 +1,6 @@
 <?php
-require_once ("src/structure/header.php");
-require_once ("src/controller/user.php");
+require_once("src/structure/header.php");
+require_once("src/controller/user.php");
 $user = new user();
 $opt = null;
 
@@ -8,7 +8,7 @@ if(!empty($_POST)){
 	if(!empty($_POST["username"]) && !empty($_POST["password"])){
 		$auth = $user->auth($_POST["username"], $_POST["password"]);
 		if($auth){
-
+			header("location: index.php");
 		}else{
 			$opt = "<div class=\"alert alert-dismissible alert-warning\">
 						<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
@@ -36,8 +36,9 @@ if(!empty($_POST)){
                 <label class="col-form-label" for="inputDefault">Identifiant</label>
                 <input type="text" class="form-control" placeholder="Identifiant" name="username" required>
                 <label class="col-form-label" for="inputDefault">Mot de passe</label>
-                <input type="password" class="form-control" placeholder="Mot de passe" name="password" required>
-                <input type="submit" class="btn btn-success" value="Connexion">
+                <input type="password" class="form-control" placeholder="Mot de passe" name="password" required></br>
+				<a href="register.php" type="button" class="btn btn-secondary">Inscription</a>
+				<input type="submit" class="btn btn-primary float-right" value="Connexion">
             </form>
             <a class="btn btn-link" href="reset.php">Mot de passe oublié ?</a>
         </div>

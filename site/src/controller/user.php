@@ -1,19 +1,21 @@
 <?php
 
-include "../dbConnect.php";
+include("/../dbConnect.php");
 
 
 class user extends dbConnect
 {
     public function auth($username, $password){
     	$respons = false;
-    	$db = $this->connectDb();
-    	$req = $db->prepare("SELECT password FROM Utilisateur WHERE username = :USERNAME");
-    	$req->bindParam("USERNAME", $username);
-    	$req->execute();
-    	$result = $req->fetchAll();
-    	if(!isset($result) && !empty($result)){
-			$this->checkPassword($password, $result);
+		if($this->checkUsername($username)){
+			$db = $this->connectDb();
+			$req = $db->prepare("SELECT password FROM Utilisateur WHERE username = ?");
+			$req->execute(array($username));
+			$result = $req->fetchAll();
+			if(sizeof($result) > 0){
+				$this->checkPassword($password, $result[0]["password"]);
+				$respons = true;
+			}
 		}
     	return $respons;
     }
@@ -21,13 +23,11 @@ class user extends dbConnect
     public function createUser($username, $password, $email){
 		$respons = false;
 		$db = $this->connectDb();
-		if(!$this->checkUsername("username", $username)){
-			if(!$this->checkEmail("email", $email)){
-				$req = $db->prepare("INSERT INTO Utilisateur (username, password, email) VALUES (:USERNAME, :PASSWORD, :EMAIL)");
-				$req->bindParam("USERNAME", $username);
-				$req->bindParam("PASSWORD", $this->hashPassword($password));
-				$req->bindParam("EMAIL", $email);
-				$req->execute();
+		if(!$this->checkUsername($username)){
+			if(!$this->checkEmail($email)){
+				$password_hash = $this->hashPassword($password);
+				$req = $db->prepare("INSERT INTO Utilisateur (username, password, email) VALUES (?, ?, ?)");
+				$req->execute(array($username, $this->hashPassword($password), $email));
 				$respons = true;
 			}
 		}
@@ -35,26 +35,38 @@ class user extends dbConnect
 	}
 
 	private function hashPassword($password){
-
+    	//salted password
+		return hash('sha256',$password);
 	}
 
-	private function check($champ, $data){
+	private function checkUsername($username){
 		$respons = false;
 		$db = $this->connectDb();
-		$req = $db->prepare("SELECT :CHAMP FROM Utilisateur WHERE email = :DATA");
-		$req->bindParam("CHAMP", $champ);
-		$req->bindParam("DATA", $data);
+		$req = $db->prepare("SELECT * FROM Utilisateur WHERE username = ?");
+		$req->execute(array($username));
 		$result = $req->fetchAll();
-		if(!isset($result) && !empty($result)){
+		if(sizeof($result) > 0){
 			$respons = true;
 		}
-		$req->execute();
+		return $respons;
+	}
+
+	private function checkEmail($email){
+		$respons = false;
+		$db = $this->connectDb();
+		$req = $db->prepare("SELECT * FROM Utilisateur WHERE email = ?");
+		$req->execute(array($email));
+		$result = $req->fetchAll();
+		if(sizeof($result) > 0){
+			$respons = true;
+		}
 		return $respons;
 	}
 
 	private function checkPassword($password, $passwordHash){
 		$respons = false;
-
+		if($this->hashPassword($password) === $passwordHash)
+			$respons = true;
 		return $respons;
 	}
 }
