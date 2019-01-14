@@ -7,7 +7,9 @@ $opt = null;
 if(!empty($_POST)){
 	if(!empty($_POST["username"]) && !empty($_POST["password"])){
 		$auth = $user->auth($_POST["username"], $_POST["password"]);
-		if($auth){
+		if($auth[0]){
+			$_SESSION["auth"] = array("id"=>$auth[1]["id"], "username"=>$auth[1]["username"], "email"=>$auth[1]["email"]);
+//			$_SESSION["auth"] = array($auth[1]["id"], $auth[1]["username"], $auth[1]["email"]);
 			header("location: index.php");
 		}else{
 			$opt = "<div class=\"alert alert-dismissible alert-warning\">
@@ -28,8 +30,19 @@ if(!empty($_POST)){
 ?>
 <div class="container">
     <div class="row">
-		<div class="col-12" id="error">
-			<?php echo $opt; ?>
+		<div class="col-12" id="message">
+			<?php
+			if($opt !== "")
+				echo $opt;
+			if(!empty($_SESSION["flash"])){
+				echo "	<div class='alert alert-dismissible alert-" . $_SESSION["flash"][0] . "'>
+							<button type='button' class='close' data-dismiss='alert'>&times;</button>
+							<h4 class='alert-heading'>" . $_SESSION["flash"][1] . "</h4>
+							<p class='mb-0'>" . $_SESSION["flash"][2] . "</p>
+						</div>";
+				unset($_SESSION["flash"]);
+			}
+			?>
 		</div>
         <div class="col-4 offset-4">
             <form action="login.php" method="POST" class="form-group">

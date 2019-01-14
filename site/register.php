@@ -9,12 +9,13 @@ if(!empty($_POST)){
 		if ($_POST["password"] === $_POST["password_conf"]){
 			$register = $user->createUser($_POST["username"], $_POST["password"], $_POST["email"]);
 			if($register){
-
+				$_SESSION["flash"] = array("success", "Succès", "Votre inscription est valide, veuillez vous connecter pour avoir acces au site.");
+				header("location: login.php");
 			}else{
 				$opt = "<div class=\"alert alert-dismissible alert-warning\">
 						<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
 						<h4 class=\"alert-heading\">Erreur</h4>
-						<p class=\"mb-0\">Votre mot de passe et votre nom d'utilisateur ne correspondent pas.</p>
+						<p class=\"mb-0\">Le nom d'utilisateur ou l'adresse mail est déjà utilisé.</p>
 					</div>";
 			}
 		}else{
