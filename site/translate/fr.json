@@ -1,0 +1,19 @@
+{
+	"alert": {
+		"register": {
+			"valide": "Votre inscription est valide, veuillez vous connecter pour avoir acces au site.",
+			"alreadyUsed": "Le nom d'utilisateur ou l'adresse mail est déjà utilisé.",
+			"badPassword": "Vos mots de passes ne correspondent pas.",
+			"completAll": "Veuillez rensegner tous les champs."
+		},
+		"login": {
+			"badId": "Votre mot de passe et votre nom d'utilisateur ne correspondent pas.",
+			"completAll": "Veuillez rensegner votre identifiant et votre mot de passe."
+		},
+		"default": {
+			"alreadyConnect": "Vous êtes déjà connecté au site.",
+			"disconnect": "Vous ètes déconnecté.",
+			"notConnected": "Vous devez etre connecter pour avoir acces à cette partie du site."
+		}
+	}
+}

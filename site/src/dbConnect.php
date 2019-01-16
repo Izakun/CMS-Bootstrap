@@ -2,7 +2,7 @@
 
 class dbConnect {
 	private $host = "localhost";
-	private $dbName = "DB_CMS";
+	private $dbName = "db_cms";
 	private $username= "root";
 	private $password = "root";
 

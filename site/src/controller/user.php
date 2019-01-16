@@ -5,37 +5,35 @@ include("/../dbConnect.php");
 
 class user extends dbConnect
 {
-    public function auth($username, $password){
+    public function login($request){
     	$ok = false;
     	$result = null;
-		if($this->checkUsername($username)){
+		if($this->checkUsername($request["username"])){
 			$db = $this->connectDb();
 			$req = $db->prepare("SELECT * FROM Utilisateur WHERE username = ?");
-			$req->execute(array($username));
+			$req->execute(array($request["username"]));
 			$result = $req->fetchAll();
 			if(sizeof($result) > 0){
-				$this->checkPassword($password, $result[0]["password"]);
+				$this->checkPassword($request["password"], $result[0]["password"]);
 				$ok = true;
 			}
 		}
 		// retourne l'état de l'auth et si l'auth a réussit, retourne les informations de l'utilisateur pour la session
-    	return array($ok, $result[0]);
+    	return array("ok"=>$ok, "user"=>$result[0]);
     }
 
-    public function createUser($username, $password, $email){
+    public function createUser($request){
 		$respons = false;
 		$db = $this->connectDb();
-		if(!$this->checkUsername($username) && !$this->checkEmail($email)){
-			$password_hash = $this->hashPassword($password);
+		if(!$this->checkUsername($request["username"]) && !$this->checkEmail($request["email"])){
 			$req = $db->prepare("INSERT INTO Utilisateur (username, password, email) VALUES (?, ?, ?)");
-			$req->execute(array($username, $this->hashPassword($password), $email));
+			$req->execute(array($request["username"], $this->hashPassword($request["password"]), $request["email"]));
 			$respons = true;
 		}
 		return $respons;
 	}
 
 	private function hashPassword($password){
-    	//salted password
 		return hash('sha256',$password);
 	}
 

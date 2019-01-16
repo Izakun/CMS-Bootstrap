@@ -1,20 +1,20 @@
 <?php
 require_once("src/structure/header.php");
-require_once("src/controller/user.php");
-$user = new user();
 
+//$default->checkConnected($_SESSION);
 if(empty($_SESSION["auth"])){
-	$_SESSION["flash"] = array("warning", "Erreur", "Vous devez etre connecter pour avoir acces à cette partie du site.");
+	$default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["default"]["notConnected"]);
 	header("location: login.php");
 }
 
+if(!empty($_GET["disconnect"])){
+	unset($_SESSION["auth"]);
+	$default->setAlertMessage("success", "Succès", $default->getTrad()["alert"]["default"]["disconnect"]);
+	header("location: login.php");
+}
 ?>
-<div class="container">
-    <div class="row">
-		<div class="col-12">
-			<p>GG tu es connecté <?php echo $_SESSION["auth"]["username"];?></p>
-		</div>
-    </div>
+<div class="col-12">
+	<p>GG tu es connecté <?php echo $_SESSION["auth"]["username"];?></p>
 </div>
 <?php
 require_once ("src/structure/footer.php")
