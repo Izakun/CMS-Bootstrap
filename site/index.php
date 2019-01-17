@@ -1,5 +1,5 @@
 <?php
-require_once("src/structure/header.php");
+require_once("templates/default/header.php");
 
 //$default->checkConnected($_SESSION);
 if(empty($_SESSION["auth"])){
@@ -17,5 +17,5 @@ if(!empty($_GET["disconnect"])){
 	<p>GG tu es connecté <?php echo $_SESSION["auth"]["username"];?></p>
 </div>
 <?php
-require_once ("src/structure/footer.php")
+require_once("templates/default/footer.php")
 ?>

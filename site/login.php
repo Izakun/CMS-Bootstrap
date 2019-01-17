@@ -1,5 +1,5 @@
 <?php
-require_once("src/structure/header.php");
+require_once("templates/default/header.php");
 
 //$default->checkConnected($_SESSION);
 if(!empty($_SESSION["auth"])){
@@ -11,7 +11,7 @@ if(!empty($_POST)){
 	if(!empty($_POST["username"]) && !empty($_POST["password"])){
 		$auth = $user->login(array("username"=>$_POST["username"], "password"=>$_POST["password"]));
 		if($auth["ok"]){
-			$_SESSION["auth"] = array("id"=>$auth["user"]["id"], "username"=>$auth["user"]["username"], "email"=>$auth["user"]["email"]);
+			$_SESSION["auth"] = $auth["userController"];
 			header("location: index.php");
 		}else{
 			$default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["login"]["badId"]);
@@ -34,5 +34,5 @@ if(!empty($_POST)){
 	<a class="btn btn-link" href="reset.php">Mot de passe oublié ?</a>
 </div>
 <?php
-require_once ("src/structure/footer.php")
+require_once("templates/default/footer.php");
 ?>

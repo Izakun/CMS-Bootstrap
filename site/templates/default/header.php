@@ -1,15 +1,17 @@
 <?php
-require_once("src/controller/defaut.php");
-require_once("src/controller/user.php");
-$default = new Defaut();
-$default->getTrad();
-$user = new user();
-
 session_start();
+
+require_once("src/controller/defaultController.php");
+require_once("src/controller/userController.php");
+require_once("src/controller/adminController.php");
+$default = new defaultController();
+$user = new userController();
+$admin = new adminController();
 ?>
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="asset/css/theme/sandstone.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 	<title>Login</title>
 </head>
 
@@ -42,6 +44,8 @@ session_start();
 			</button>
 			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
 				<a class="dropdown-item text-right" href="#">Profil</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item text-right" href="admin.php">Administration</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item text-right" href="index.php?disconnect=true">Déconnexion</a>
 			</div>

@@ -1,5 +1,5 @@
 <?php
-require_once("src/structure/header.php");
+require_once("templates/default/header.php");
 
 //$default->checkConnected($_SESSION);
 if(!empty($_SESSION["auth"])){
@@ -40,5 +40,5 @@ if(!empty($_POST)){
 	</form>
 </div>
 <?php
-require_once ("src/structure/footer.php")
+require_once("templates/default/footer.php")
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-class defaut
+class defaultController
 {
 	public function getTrad(){
 		$translate = file_get_contents('translate/fr.json');
@@ -24,7 +24,7 @@ class defaut
 
 	public function showAlertMessage($message){
 		if(!empty($message["flash"])){
-			echo "	<div class=\"col-12\" id=\"message\">
+			echo "	<div class=\"col-12\" id=\"alert-message\">
 						<div class=\"alert alert-dismissible alert-" . $message["flash"][0] . "\">
 							<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
 							<h4 class=\"alert-heading\">" . $message["flash"][1] . "</h4>
