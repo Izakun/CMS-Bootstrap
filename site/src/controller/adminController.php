@@ -10,7 +10,9 @@ class adminController extends dbConnect
 	}
 
 	public function removeUser($id){
-
+		$db = $this->connectDb();
+		$query = $db->prepare("DELETE FROM users WHERE id = ?");
+		return $query->execute(array($id));
 	}
 
 	public function upgradeUser($id){

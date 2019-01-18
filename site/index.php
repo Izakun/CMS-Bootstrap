@@ -3,7 +3,7 @@ require_once("templates/default/header.php");
 
 //$default->checkConnected($_SESSION);
 if(empty($_SESSION["auth"])){
-	$default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["default"]["notConnected"]);
+	$default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["default"]["notAutorized"]);
 	header("location: login.php");
 }
 

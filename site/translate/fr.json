@@ -13,7 +13,11 @@
 		"default": {
 			"alreadyConnect": "Vous êtes déjà connecté au site.",
 			"disconnect": "Vous ètes déconnecté.",
-			"notConnected": "Vous devez etre connecter pour avoir acces à cette partie du site."
+			"notAuthorized": "Vous n'avez pas l'autorisation d'accéder à cette partie du site."
+		},
+		"admin": {
+			"removedOk": "Suppression de l'utilisateur réussite.",
+			"removedKo": "Impossible de supprimer l'utilisateur, veuillez réessayer plus tard"
 		}
 	}
 }

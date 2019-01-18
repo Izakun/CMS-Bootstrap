@@ -11,7 +11,7 @@ class userController extends dbConnect
     	$user = null;
 		if($this->checkUsername($request["username"])){
 			$db = $this->connectDb();
-			$query = $db->prepare("SELECT a.id,a.username,a.password,a.email,b.admin,b.themeId FROM users a INNER JOIN preferences b where a.username = ?");
+			$query = $db->prepare("SELECT a.id,a.username,a.password,a.email,b.admin,b.themeId FROM users a INNER JOIN preferences b ON a.id = b.userId where a.username = ?");
 			$query->execute(array($request["username"]));
 			$result = $query->fetch(PDO::FETCH_ASSOC);
 			if(sizeof($result) > 0){
@@ -28,7 +28,7 @@ class userController extends dbConnect
 			"id"=>$request["id"],
 			"username"=>$request["username"],
 			"email"=>$request["email"],
-			"adminController"=>$request["adminController"],
+			"admin"=>$request["admin"],
 			"theme"=>$request["themeId"],
 		);
 	}

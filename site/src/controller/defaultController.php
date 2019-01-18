@@ -13,7 +13,7 @@ class defaultController
 			$this->setAlertMessage("warning", "Erreur", $this->getTrad()["alert"]["default"]["alreadyConnect"]);
 			header("location: index.php");
 		}else{
-			$this->setAlertMessage("warning", "Erreur", $this->getTrad()["alert"]["default"]["notConnected"]);
+			$this->setAlertMessage("warning", "Erreur", $this->getTrad()["alert"]["default"]["notAuthorized"]);
 			header("location: login.php");
 		}
 	}
