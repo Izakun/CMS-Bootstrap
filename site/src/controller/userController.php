@@ -13,7 +13,7 @@ class userController extends dbConnect
 			$db = $this->connectDb();
 			$query = $db->prepare("SELECT a.id,a.username,a.password,a.email,b.admin,b.themeId FROM users a INNER JOIN preferences b where a.username = ?");
 			$query->execute(array($request["username"]));
-			$result = $query->fetchAll(PDO::FETCH_ASSOC);
+			$result = $query->fetch(PDO::FETCH_ASSOC);
 			if(sizeof($result) > 0){
 				$ok = $this->checkPassword($request["password"], $result["password"]);
 				$user = $this->setUserSession($result);
@@ -29,7 +29,7 @@ class userController extends dbConnect
 			"username"=>$request["username"],
 			"email"=>$request["email"],
 			"adminController"=>$request["adminController"],
-			"theme"=>$request["themeId"]
+			"theme"=>$request["themeId"],
 		);
 	}
 
@@ -46,8 +46,8 @@ class userController extends dbConnect
 			$query = $db->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
 			$query->execute(array($request["username"], $this->hashPassword($request["password"]), $request["email"]));
 			$query = $db->prepare("INSERT INTO preferences (userId, admin, themeId) VALUES (?, ?, ?)");
-			$query->execute(array($db->lastInsertId(), 0, 0));
-			$respons = true;
+            $query->execute(array($db->lastInsertId(), 0, 1));
+            $respons = true;
 		}
 		return $respons;
 	}
