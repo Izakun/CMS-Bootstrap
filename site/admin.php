@@ -8,18 +8,24 @@ if(empty($_SESSION["auth"]) || $_SESSION["auth"]["admin"] != 1){
 }
 
 if(!empty($_POST) && !empty($_POST["id"])){
-	if($admin->removeUser($_POST["id"])){
-		$default->setAlertMessage("success", "Succè", $default->getTrad()["alert"]["admin"]["removedOk"]);
-	}else{
-		$default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["removedKo"]);
-	}if($admin->downgradeUser($_POST["id"])){
-        $default->setAlertMessage("success", "Succè", $default->getTrad()["alert"]["admin"]["downgradOk"]);
-    }else{
-        $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["downgradKo"]);
-    }if($admin->upgradeUser($_POST["id"])){
-        $default->setAlertMessage("success", "Succè", $default->getTrad()["alert"]["admin"]["upgradeOk"]);
-    }else{
-        $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["upgradeKo"]);
+    if ($_POST["action"] === "remove"){
+        if($admin->removeUser($_POST["id"])){
+            $default->setAlertMessage("success", "Succè", $default->getTrad()["alert"]["admin"]["removedOk"]);
+        }else{
+            $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["removedKo"]);
+        }
+    } elseif ($_POST["action"] === "downgrade"){
+        if($admin->downgradeUser($_POST["id"])){
+            $default->setAlertMessage("success", "Succè", $default->getTrad()["alert"]["admin"]["downgradOk"]);
+        }else{
+            $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["downgradKo"]);
+        }
+    } elseif($_POST["action"] === "upgrade"){
+        if($admin->upgradeUser($_POST["id"])){
+            $default->setAlertMessage("success", "Succè", $default->getTrad()["alert"]["admin"]["upgradeOk"]);
+        }else{
+            $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["upgradeKo"]);
+        }
     }
 }
 ?>
@@ -42,10 +48,10 @@ if(!empty($_POST) && !empty($_POST["id"])){
                         <tr class='active'>
                             <td><input type="hidden" name="id" value="<?php echo $value["id"]; ?>"><?php echo $value["username"];?></td>
                             <td>
-                                <button class='btn btn-danger btn' type="submit"><i class="fas fa-trash"></i></button>
+                                <button class='btn btn-danger btn' type="submit" name="action" value="remove"><i class="fas fa-trash"></i></button>
                             </td>
                             <td>
-                                <button class='btn btn-primary btn' type="submit"><i class="fas fa-user-cog"></i></button>
+                                <button class='btn btn-primary btn' type="submit" name="action" value="downgrade"><i class="fas fa-user-cog"></i></button>
                             </td>
                         </tr>
                     </form>
