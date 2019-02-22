@@ -56,7 +56,7 @@ $admin = new adminController();
 	</div>
 </nav>
 <div class="container">
-	<div class="row">
+	<div class="row" style="padding-top: 20px">
 <?php
 $default->showAlertMessage($_SESSION);
 ?>
