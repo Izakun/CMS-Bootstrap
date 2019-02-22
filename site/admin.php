@@ -45,7 +45,7 @@ if(!empty($_POST) && !empty($_POST["id"])){
                                 <button class='btn btn-danger btn' type="submit"><i class="fas fa-trash"></i></button>
                             </td>
                             <td>
-                                <button class='btn btn-danger btn' type="submit"><i class="fas fa-user-cog"></i></button>
+                                <button class='btn btn-primary btn' type="submit"><i class="fas fa-user-cog"></i></button>
                             </td>
                         </tr>
                     </form>
