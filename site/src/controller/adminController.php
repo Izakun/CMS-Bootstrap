@@ -23,7 +23,7 @@ class adminController extends dbConnect
 
 	public function downgradeUser($id){
         $db = $this->connectDb();
-        $query = $db->prepare("DELETE FROM users WHERE id = ?");
+        $query = $db->prepare("UPDATE users SET admin = 0 WHERE id = ?");
         return $query->execute(array($id));
 	}
 }

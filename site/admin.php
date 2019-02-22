@@ -12,7 +12,15 @@ if(!empty($_POST) && !empty($_POST["id"])){
 		$default->setAlertMessage("success", "Succè", $default->getTrad()["alert"]["admin"]["removedOk"]);
 	}else{
 		$default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["removedKo"]);
-	}
+	}if($admin->downgradeUser($_POST["id"])){
+        $default->setAlertMessage("success", "Succè", $default->getTrad()["alert"]["admin"]["downgradOk"]);
+    }else{
+        $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["downgradKo"]);
+    }if($admin->upgradeUser($_POST["id"])){
+        $default->setAlertMessage("success", "Succè", $default->getTrad()["alert"]["admin"]["upgradeOk"]);
+    }else{
+        $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["upgradeKo"]);
+    }
 }
 ?>
 
