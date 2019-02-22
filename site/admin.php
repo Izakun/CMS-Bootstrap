@@ -25,6 +25,7 @@ if(!empty($_POST) && !empty($_POST["id"])){
 				<tr>
 					<th>Utilisateur</th>
 					<th>Supprimer</th>
+                    <th>Admin</th>
 				</tr>
 				</thead>
 				<tbody class="cours">
@@ -35,6 +36,9 @@ if(!empty($_POST) && !empty($_POST["id"])){
 							<td>
 								<button class='btn btn-danger btn' type="submit"><i class="fas fa-trash"></i></button>
 							</td>
+                            <td>
+                                <button class='btn btn-danger btn' type="submit"><i "class="fas fa-user-cog"></i></button>
+                            </td>
 						</tr>
 					</form>
 				<?php endforeach; ?>
