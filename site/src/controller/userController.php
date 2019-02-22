@@ -43,10 +43,10 @@ class userController extends dbConnect
 		$respons = false;
 		$db = $this->connectDb();
 		if(!$this->checkUsername($request["username"]) && !$this->checkEmail($request["email"])){
-			$query = $db->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
-			$query->execute(array($request["username"], $this->hashPassword($request["password"]), $request["email"]));
-			$query = $db->prepare("INSERT INTO preferences (userId, admin, themeId) VALUES (?, ?, ?)");
-            $query->execute(array($db->lastInsertId(), 0, 1));
+			$query = $db->prepare("INSERT INTO users (username, password, email, admin) VALUES (?, ?, ?, ?)");
+			$query->execute(array($request["username"], $this->hashPassword($request["password"]), $request["email"], 0));
+			$query = $db->prepare("INSERT INTO preferences (userId, themeId) VALUES (?, ?)");
+            $query->execute(array($db->lastInsertId(), 1));
             $respons = true;
 		}
 		return $respons;
