@@ -20,6 +20,8 @@ class adminController extends dbConnect
 	}
 
 	public function downgradeUser($id){
-
+        $db = $this->connectDb();
+        $query = $db->prepare("DELETE FROM users WHERE id = ?");
+        return $query->execute(array($id));
 	}
 }
