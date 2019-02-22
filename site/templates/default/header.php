@@ -10,7 +10,8 @@ $admin = new adminController();
 ?>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="asset/css/theme/sandstone.min.css">
+    <link rel="stylesheet" type="text/css" href="asset/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="asset/css/theme/sandstone.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 	<title>Login</title>
 </head>
