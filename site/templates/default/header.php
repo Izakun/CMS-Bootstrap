@@ -45,8 +45,10 @@ $admin = new adminController();
 			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
 				<a class="dropdown-item text-right" href="#">Profil</a>
 				<div class="dropdown-divider"></div>
+                <?php if($_SESSION["auth"]["admin"] == 1):?>
 				<a class="dropdown-item text-right" href="admin.php">Administration</a>
 				<div class="dropdown-divider"></div>
+                <?php endif; ?>
 				<a class="dropdown-item text-right" href="index.php?disconnect=true">Déconnexion</a>
 			</div>
 		</div>
