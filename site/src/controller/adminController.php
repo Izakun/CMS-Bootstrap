@@ -16,7 +16,9 @@ class adminController extends dbConnect
 	}
 
 	public function upgradeUser($id){
-
+        $db = $this->connectDb();
+        $query = $db->prepare("UPDATE USER SET admin = 1 WHERE id = ?");
+        return $query->execute(array($id));
 	}
 
 	public function downgradeUser($id){
