@@ -53,13 +53,6 @@ if(!empty($_POST) && !empty($_POST["id"])){
                                 <button class='btn btn-danger btn' type="submit" name="action" value="remove"><i class="fas fa-trash"></i></button>
                             </td>
                             <td>
-                                <button class='btn btn-primary btn' type="submit" name="action" value="upgrade"><i class="fas fa-user-cog"></i></button>
-                            </td>
-                            <td>
-                                <button class='btn btn-primary btn' type="submit" name="action" value="downgrade"><i class="fas fa-user-cog"></i></button>
-                                <button class='btn btn-<?php echo ($value["admin"] == 1 ? "warning" : "info")?> btn' type="submit" name="action" value="<?php echo ($value["admin"] == 1 ? "downgrade" : "upgrade")?>">
-                                    <?php echo ($value["admin"] == 1 ? "<i class='fas fa-user-minus'></i>" : "<i class='fas fa-user-plus'></i>")?>
-                                </button>
                                 <button class='btn btn-<?php echo ($value["admin"] == 1 ? "warning" : "info")?> btn' type="submit" name="action" value="<?php echo ($value["admin"] == 1 ? "downgrade" : "upgrade")?>">
                                     <?php echo ($value["admin"] == 1 ? "<i class='fas fa-user-minus'></i>" : "<i class='fas fa-user-plus'></i>")?>
                                 </button>
