@@ -35,7 +35,7 @@ if(!empty($_POST)){
 		<input type="password" class="form-control" placeholder="Mot de passe" name="password_conf" required>
 		<label class="col-form-label" for="inputDefault">Email</label>
 		<input type="email" class="form-control" placeholder="dupond.pierre@gmail.com" name="email" required></br>
-		<a href="login.php" type="button" class="btn btn-secondary">Connexion</a>
+        <input type="button" class="btn btn-secondary" value="Connexion" onclick="document.location.href='login.php'">
 		<input type="submit" class="btn btn-primary float-right" value="Inscription">
 	</form>
 </div>

@@ -12,7 +12,7 @@ $admin = new adminController();
 <head>
     <link rel="stylesheet" type="text/css" href="asset/css/custom.css">
     <link rel="stylesheet" type="text/css" href="asset/css/theme/sandstone.min.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+	<link rel="stylesheet" href="vendor/fontawesome-5.8.2/css/all.css">
 	<title>Login</title>
 </head>
 
@@ -57,7 +57,7 @@ $admin = new adminController();
 	</div>
 </nav>
 <div class="container">
-	<div class="row" style="padding-top: 20px">
+	<div class="row row-space">
 <?php
 $default->showAlertMessage($_SESSION);
 ?>

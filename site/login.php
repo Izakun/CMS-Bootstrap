@@ -28,7 +28,7 @@ if(!empty($_POST)){
 		<input type="text" class="form-control" placeholder="Identifiant" name="username" required>
 		<label class="col-form-label" for="inputDefault">Mot de passe</label>
 		<input type="password" class="form-control" placeholder="Mot de passe" name="password" required></br>
-		<a href="register.php" type="button" class="btn btn-secondary">Inscription</a>
+		<input type="button" class="btn btn-secondary" value="Inscription" onclick="document.location.href='register.php'">
 		<input type="submit" class="btn btn-primary float-right" value="Connexion">
 	</form>
 	<a class="btn btn-link" href="reset.php">Mot de passe oublié ?</a>

@@ -30,6 +30,58 @@ if(!empty($_POST) && !empty($_POST["id"])){
 }
 ?>
 
+<div class="col-lg-12">
+    <div class="card border-secondary">
+        <div class="card-header">Gestion des articles</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card border-secondary">
+                        <div class="card-header">Créer un article</div>
+                        <div class="card-body">
+                            <form>
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label for="articleTitle">Titre de l'article</label>
+                                        <input type="text" class="form-control" id="articleTitle">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleTextarea">Example textarea</label>
+                                        <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                                    </div>
+                                    <fieldset class="form-group">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="" checked="">
+                                                Afficher l'article
+                                            </label>
+                                        </div>
+                                        <div class="form-check disabled">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="" disabled="">
+                                                Autoriser les commentaires
+                                            </label>
+                                        </div>
+                                    </fieldset>
+                                    <button type="submit" class="btn btn-success">Créer</button>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card border-secondary">
+                        <div class="card-header">Gestion des articles</div>
+                        <div class="card-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="row row-space">
 <div class="col-lg-4">
     <div class="card border-secondary">
         <div class="card-header">Gestion des comptes</div>
