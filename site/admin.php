@@ -7,25 +7,35 @@ if(empty($_SESSION["auth"]) || $_SESSION["auth"]["admin"] != 1){
 	header("location: index.php");
 }
 
-if(!empty($_POST) && !empty($_POST["id"])){
-    if ($_POST["action"] === "remove"){
-        if($admin->removeUser($_POST["id"])){
-            $default->setAlertMessage("success", "Succès", $default->getTrad()["alert"]["admin"]["removedOk"]);
-        }else{
-            $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["removedKo"]);
+if(!empty($_POST)){
+    if(!empty($_POST["id"])){
+        if ($_POST["action"] === "remove"){
+            if($admin->removeUser($_POST["id"])){
+                $default->setAlertMessage("success", "Succès", $default->getTrad()["alert"]["admin"]["removedOk"]);
+            }else{
+                $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["removedKo"]);
+            }
+        } elseif ($_POST["action"] === "downgrade"){
+            if($admin->downgradeUser($_POST["id"])){
+                $default->setAlertMessage("success", "Succès", $default->getTrad()["alert"]["admin"]["downgradOk"]);
+            }else{
+                $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["downgradKo"]);
+            }
+        } elseif($_POST["action"] === "upgrade") {
+            if ($admin->upgradeUser($_POST["id"])) {
+                $default->setAlertMessage("success", "Succès", $default->getTrad()["alert"]["admin"]["upgradeOk"]);
+            } else {
+                $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["upgradeKo"]);
+            }
         }
-    } elseif ($_POST["action"] === "downgrade"){
-        if($admin->downgradeUser($_POST["id"])){
-            $default->setAlertMessage("success", "Succès", $default->getTrad()["alert"]["admin"]["downgradOk"]);
-        }else{
-            $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["downgradKo"]);
+    }
+var_dump(!empty($_POST["articleTitle"]) && !empty($_POST["articleSubject"]));
+    if(!empty($_POST["articleTitle"]) && !empty($_POST["articleSubject"])){
+        if ($_POST["action"] === "create"){
+            // enregistrer l'article
         }
-    } elseif($_POST["action"] === "upgrade"){
-        if($admin->upgradeUser($_POST["id"])){
-            $default->setAlertMessage("success", "Succès", $default->getTrad()["alert"]["admin"]["upgradeOk"]);
-        }else{
-            $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["upgradeKo"]);
-        }
+    } else {
+        $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["article"]["completAll"]);
     }
 }
 ?>
@@ -39,32 +49,28 @@ if(!empty($_POST) && !empty($_POST["id"])){
                     <div class="card border-secondary">
                         <div class="card-header">Créer un article</div>
                         <div class="card-body">
-                            <form>
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label for="articleTitle">Titre de l'article</label>
-                                        <input type="text" class="form-control" id="articleTitle">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleTextarea">Example textarea</label>
-                                        <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-                                    </div>
-                                    <fieldset class="form-group">
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" checked="">
-                                                Afficher l'article
-                                            </label>
-                                        </div>
-                                        <div class="form-check disabled">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" disabled="">
-                                                Autoriser les commentaires
-                                            </label>
-                                        </div>
-                                    </fieldset>
-                                    <button type="submit" class="btn btn-success">Créer</button>
-                                </fieldset>
+                            <form action="admin.php" method="post">
+                                <div class="form-group">
+                                    <label for="articleTitle">Titre de l'article</label>
+                                    <input type="text" class="form-control" id="articleTitle" name="articleTitle" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="articleSubject">Sujet</label>
+                                    <textarea class="form-control" id="articleSubject" name="articleSubject" rows="5" required></textarea>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="articleShow" checked>
+                                        Afficher l'article
+                                    </label>
+                                </div>
+                                <div class="form-check disabled">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="articleComment">
+                                        Autoriser les commentaires
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-success" value="create">Créer</button>
                             </form>
                         </div>
                     </div>

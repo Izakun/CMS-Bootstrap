@@ -1,8 +1,7 @@
 <?php
 require_once("templates/default/header.php");
 
-//$default->checkConnected($_SESSION);
-if(!empty($_SESSION["auth"])){
+if(!empty($_SESSION["auth"]["username"])){
 	$default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["default"]["alreadyConnect"]);
 	header("location: index.php");
 }

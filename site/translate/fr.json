@@ -17,11 +17,14 @@
 		},
 		"admin": {
 			"removedOk": "Suppression de l'utilisateur réussite.",
-			"removedKo": "Impossible de supprimer l'utilisateur, veuillez réessayer plus tard",
+			"removedKo": "Impossible de supprimer l'utilisateur, veuillez réessayer plus tard.",
 			"downgradOk": "L'utilisateur n'est plus admin.",
-			"downgradKo": "Impossible de supprimer le droit de l'utilisateur, veuillez réessayer plus tard",
+			"downgradKo": "Impossible de supprimer le droit de l'utilisateur, veuillez réessayer plus tard.",
 			"upgradeOk": "L'utilisateur est plus admin.",
-			"upgradeKo": "Impossible de donner le droit à l'utilisateur, veuillez réessayer plus tard"
+			"upgradeKo": "Impossible de donner le droit à l'utilisateur, veuillez réessayer plus tard.",
+			"article": {
+				"completAll": "Le titer et le sujet de l'article sont obligatoire pour le créer."
+			}
 		}
 	}
 }
