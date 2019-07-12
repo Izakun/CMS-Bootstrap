@@ -1,29 +1,38 @@
 <?php
 
-class adminController extends dbConnect
+class adminController
 {
+    private $db;
+    private $con;
+
+    public function __construct(dbConnect $db)
+    {
+        $this->db = $db;
+        $this->con = $db->connectDb();
+    }
+
 	public function getAllUser(){
-		$db = $this->connectDb();
-		$query = $db->prepare("SELECT * FROM users ORDER BY username ASC");
+		$query = $this->con->prepare("SELECT * FROM users ORDER BY username ASC");
 		$query->execute();
+		$this->db->closeCon($this->db);
 		return $query->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	public function removeUser($id){
-		$db = $this->connectDb();
-		$query = $db->prepare("DELETE FROM users WHERE id = ?");
+		$query = $this->con->prepare("DELETE FROM users WHERE id = ?");
+        $this->db->closeCon($this->db);
 		return $query->execute(array($id));
 	}
 
 	public function upgradeUser($id){
-        $db = $this->connectDb();
-        $query = $db->prepare("UPDATE users SET admin = 1 WHERE id = ?");
+        $query = $this->con->prepare("UPDATE users SET admin = 1 WHERE id = ?");
+        $this->db->closeCon($this->db);
         return $query->execute(array($id));
 	}
 
 	public function downgradeUser($id){
-        $db = $this->connectDb();
-        $query = $db->prepare("UPDATE users SET admin = 0 WHERE id = ?");
+        $query = $this->con->prepare("UPDATE users SET admin = 0 WHERE id = ?");
+        $this->db->closeCon($this->db);
         return $query->execute(array($id));
 	}
 }

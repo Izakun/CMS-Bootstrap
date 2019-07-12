@@ -10,4 +10,8 @@ class dbConnect {
 		return new PDO('mysql:host=' . $this->host . ';dbname=' . $this->dbName, $this->username, $this->password);
 	}
 
+	public function closeCon($con){
+	    unset($con);
+    }
+
 }

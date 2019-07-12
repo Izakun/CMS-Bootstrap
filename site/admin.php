@@ -1,6 +1,7 @@
 <?php
 require_once("templates/default/header.php");
 require_once("src/controller/adminController.php");
+require_once("src/controller/articleController.php");
 
 if(empty($_SESSION["auth"]) || $_SESSION["auth"]["admin"] != 1){
 	$default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["default"]["notAuthorized"]);
@@ -29,10 +30,10 @@ if(!empty($_POST)){
             }
         }
     }
-var_dump(!empty($_POST["articleTitle"]) && !empty($_POST["articleSubject"]));
+
     if(!empty($_POST["articleTitle"]) && !empty($_POST["articleSubject"])){
         if ($_POST["action"] === "create"){
-            // enregistrer l'article
+            $create = $article->create(array("title"=>$_POST["articleTitle"], "subject"=>$_POST["articleSubject"], "show"=>$_POST["articleShow"], "comment"=>$_POST["articleComment"], "author"=>$user->getId()));
         }
     } else {
         $default->setAlertMessage("warning", "Erreur", $default->getTrad()["alert"]["admin"]["article"]["completAll"]);
@@ -60,17 +61,17 @@ var_dump(!empty($_POST["articleTitle"]) && !empty($_POST["articleSubject"]));
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="articleShow" checked>
+                                        <input class="form-check-input" type="checkbox" name="articleShow" checked="1">
                                         Afficher l'article
                                     </label>
                                 </div>
                                 <div class="form-check disabled">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="articleComment">
+                                        <input class="form-check-input" type="checkbox" name="articleComment" checked="0">
                                         Autoriser les commentaires
                                     </label>
                                 </div>
-                                <button type="submit" class="btn btn-success" value="create">Créer</button>
+                                <button type="submit" class="btn btn-success" name="action" value="create">Créer</button>
                             </form>
                         </div>
                     </div>

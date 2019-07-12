@@ -1,12 +1,16 @@
 <?php
 session_start();
 
+require_once("src/dbConnect.php");
 require_once("src/controller/defaultController.php");
 require_once("src/controller/userController.php");
 require_once("src/controller/adminController.php");
+require_once("src/controller/articleController.php");
+$db = new dbConnect();
 $default = new defaultController();
-$user = new userController();
-$admin = new adminController();
+$user = new userController($db);
+$admin = new adminController($db);
+$article = new articleController($db);
 ?>
 <html>
 <head>
